@@ -3,7 +3,7 @@
 * Webserver: [NGINX](https://www.nginx.com/) + [Gunicorn](http://gunicorn.org/)
 
 ## Introduction 
-[https://a.kdm-manager.com](https://a.kdm-manager.com), also known as Advanced KDM-Manager, is an Interactive campaign manager for *Monster* by [Kingdom Death](https://kingdomdeath.com). It supersedes Timothy O'Connell's [https://github.com/toconnell/kdm-manager](KDM Manager).
+[https://a.kdm-manager.com](https://a.kdm-manager.com), also known as Advanced KDM-Manager, is an Interactive campaign manager for *Monster* by [Kingdom Death](https://kingdomdeath.com). It supersedes Timothy O'Connell's [KDM Manager](https://github.com/toconnell/kdm-manager).
 
 
 **Neither the [https://a.kdm-manager.com](https://a.kdm-manager.com) service nor any of the software utilized by that service (including the API at [https://thewatcher.io](https://thewatcher.io) are developed, authorized in any other way supported by or affiliated with Kingdom Death or Adam Poots Games, LLC.**
