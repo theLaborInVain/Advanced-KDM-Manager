@@ -1,0 +1,25 @@
+{% extends "login_base.html" %}
+
+{% block content %}
+
+    <div class="login_controls_container" ng-controller="loginController">
+
+        <button
+            id="loginSignupButton"
+            class="kd_ui_button"
+            ng-click="showSignupForm()"
+        >
+            Sign Up
+        </button>
+
+        <button
+            id="loginLoginButton"
+            class="kd_ui_button kd_ui_button_blue"
+            ng-click="showLoginForm()"
+        >
+            LOGIN
+        </button>
+        
+    </div> <!-- downtime_container -->
+
+{% endblock %}
