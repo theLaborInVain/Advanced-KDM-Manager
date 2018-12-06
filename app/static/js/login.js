@@ -7,11 +7,14 @@ app.controller("rootController", function($scope) {
 app.controller("loginController", function($scope) {
 
     $scope.showSignupForm = function() {
-        showHide("loginLoginButton");
+        console.warn("showing Signup form!")
     };
 
     $scope.showLoginForm = function() {
-        console.warn("showing login form!")
+        showHide("loginLoginButton");
+        showHide("loginSignupButton");
+        showHide("loginLoginFormPanel");
+        document.getElementById("username").focus();
     };
 
 
