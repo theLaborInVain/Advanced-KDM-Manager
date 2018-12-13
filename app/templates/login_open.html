@@ -2,47 +2,48 @@
 
 {% block content %}
 
-    <div class="login_controls_container">
+<div class="login_controls_container">
 
-        <div id="loginLoginFormPanel" ng-if="scratch.showLoginFormPanel" class="ng-fade login_control_panel">
+    <div id="loginLoginFormPanel" class="ng-fade login_control_panel">
 
-            <form action="" method="post" novalidate>
+        <form action="" method="post" novalidate>
 
-                {{ form.hidden_tag() }}
+            {{ form.hidden_tag() }}
 
-                <p>
-                    {{ form.username(size=32, autofocus='autofocus', placeholder='email') }}
-                    {% for error in form.username.errors %}
-                        <span class="login_field_error">[{{ error }}]</span>
-                    {% endfor %}
-                </p>
+            <p>
+                {{ form.username(size=32, autofocus='autofocus', placeholder='email') }}
+                {% for error in form.username.errors %}
+                    <span class="login_field_error">[{{ error }}]</span>
+                {% endfor %}
+            </p>
 
-                <p>
-                    {{ form.password(size=32, placeholder='password') }}
-                    {% for error in form.password.errors %}
-                        <span class="login_field_error">[{{ error }}]</span>
-                    {% endfor %}
-                </p>
+            <p>
+                {{ form.password(size=32, placeholder='password') }}
+                {% for error in form.password.errors %}
+                    <span class="login_field_error">[{{ error }}]</span>
+                {% endfor %}
+            </p>
 
-                <p class="remember_me">
-                    {{ form.remember_me() }}
-                    {{ form.remember_me.label(class_='login_control_panel_label checkbox_label') }}
-                </p>
+            <p class="remember_me">
+                {{ form.remember_me() }}
+                {{ form.remember_me.label(class_='login_control_panel_label checkbox_label') }}
+            </p>
 
-                <p>{{ form.submit(class_='kd_ui_button kd_ui_button_blue')}}</p>
+            <p>{{ form.submit(class_='kd_ui_button kd_ui_button_blue')}}</p>
 
-            </form>
+        </form>
 
-        </div>
-        
-    </div> <!-- downtime_container -->
-
-    <hr/>
-
-    <div class="login_link_bar">
-	    <a ng-click="scratch.showAboutModal=true">About</a>
-	    <a ng-click="scratch.showSignupModal=true">Sign Up!</a>
-        <a ng-click="scratch.showHelpModal=true">Forgot Password?</a>
     </div>
+    
+</div> <!-- login_controls_container -->
+
+<hr/>
+
+<div class="login_link_bar">
+    <a ng-click="ui.showAboutModal=true">About</a>
+    <a ng-click="ui.showSignupModal=true">Sign Up!</a>
+    <a ng-click="ui.showHelpModal=true">Forgot Password?</a>
+</div>
 
 {% endblock %}
+

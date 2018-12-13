@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="akdmManager" ng-controller="rootController" ng-init="initAPI('{{api.url}}',{{api.port}})">
+<html ng-app="akdmManager" ng-controller="rootController" ng-init="initAPI('{{api.url}}')">
     <head>
 
         <!-- 
@@ -58,91 +58,92 @@
 
                 {% block content %}{% endblock %}
 
-            </div>
+            </div><!-- login_splash -->
 
             <div class="login_footer">
                 <a href="https://thelaborinvain.com" target="top">Developed by: The Labor in Vain &nbsp;<b>2018-2019</b></a>
             </div><!-- footer -->
 
+        </div><!-- container -->
 
 
-            <!-- the FOLD starts here -->
+        <!-- login app modals start here! -->
 
-            <div id="aboutModal" ng-if="scratch.showAboutModal" class="ng-fade modal_container">
-                <div class="ui_modal settlement_event_gradient">
-                    <div class="settlement_event_modal_top">
-                        <h1>Advanced KDM Manager</h1>
-                        <p class="subtitle">- version {{meta.version}} -</p>
-                    </div>
-                    <div class="settlement_event_modal_bottom">
-                        <p>
-                            Advanced KDM Manager is an interactive campaign management service designed for use with <i><a href="https://shop.kingdomdeath.com/collections/sold-out/products/kingdom-death-monster" target="top">Monster</a></i>, by <a href="http://kingdomdeath.com" target="top">Kingdom Death</a>.
-                        </p>
-                        <p>
-                            Advanced KDM Manager and the <a href="http://api.thewatcher.io" target="top">the KD:M API</a> are developed, maintained, published, supported and provisioned by <a href="http://thelaborinvain.com">The Labor in Vain.</a>
-                        </p>
-                        <p>
-                            Neither the Advanced KDM Manager service nor any of the software utilized by the service are developed, maintained, authorized or in any other way supported by or affiliated with <a href="http://kingdomdeath.com" target="top">Kingdom Death</a> or Adam Poots Games, LLC.
-                        </p>
-
-                        <div class="settlement_event_lingering_effect_hr">
-                            Thanks for using the Manager!
-                        </div>
-
-                        <div class="settlement_event_lingering_effect_container">
-                            <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://blog.kdm-manager.com';">
-                                <div class="art">
-                                    <div class="art_inset">
-                                        <img src="/static/images/blogger.png"/>
-                                    </div>
-                                </div>
-                                <div class="text">Visit the <b>Development blog</b>.</div>
-                            </div> <!-- settlement_event_grey_box -->
-                            <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://github.com/theLaborInVain/Advanced-KDM-Manager';">
-                                <div class="art">
-                                    <div class="art_inset">
-                                        <img src="/static/images/github.png"/>
-                                    </div>
-                                </div>
-                                <div class="text">Contribute on <b>GitHub</b>.</div>
-                            </div> <!-- settlement_event_grey_box -->
-                        </div><!-- lingering effect container -->
-
-                        <div class="settlement_event_lingering_effect_container">
-                            <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://twitter.com/kdmManager';">
-                                <div class="art">
-                                    <div class="art_inset">
-                                        <img src="/static/images/twitter.png"/>
-                                    </div>
-                                </div>
-                                <div class="text">Follow the Manager on <b>Twitter</b>!</div>
-                            </div> <!-- settlement_event_grey_box -->
-                            <div class="settlement_event_lingering_effect clickable" ng-click="scratch.showAboutModal=false">
-                                <div class="art">
-                                    <div class="art_inset">
-                                        <img src="/static/images/x.png"/>
-                                    </div>
-                                </div>
-                                <div class="text">Close this window.</div>
-                            </div> <!-- settlement_event_grey_box -->
-                         </div>
-
-                    </div>
+        <div id="aboutModal" ng-if="ui.showAboutModal" class="ng-fade modal_container">
+            <div class="ui_modal settlement_event_gradient">
+                <div class="settlement_event_modal_top">
+                    <h1>Advanced KDM Manager</h1>
+                    <p class="subtitle">- version: {{meta.version}} / {{api.version}} -</p>
                 </div>
-            </div> <!-- aboutModal -->
+                <div class="settlement_event_modal_bottom">
+                    <p>
+                        Advanced KDM Manager is an interactive campaign management service designed for use with <i><a href="https://shop.kingdomdeath.com/collections/sold-out/products/kingdom-death-monster" target="top">Monster</a></i>, by <a href="http://kingdomdeath.com" target="top">Kingdom Death</a>.
+                    </p>
+                    <p>
+                        Advanced KDM Manager and the <a href="http://api.thewatcher.io" target="top">the KD:M API</a> are developed, maintained, published, supported and provisioned by <a href="http://thelaborinvain.com">The Labor in Vain.</a>
+                    </p>
+                    <p>
+                        Neither the Advanced KDM Manager service nor any of the software utilized by the service are developed, maintained, authorized or in any other way supported by or affiliated with <a href="http://kingdomdeath.com" target="top">Kingdom Death</a> or Adam Poots Games, LLC.
+                    </p>
 
-            <div id="helpModal" ng-if="scratch.showHelpModal" class="ng-fade modal_container">
-                <div class="ui_modal" ng-click="showHelpModal=false">
-                    <h1>Help!</h1>
+                    <div class="settlement_event_lingering_effect_hr">
+                        Thanks for using the Manager!
+                    </div>
+
+                    <div class="settlement_event_lingering_effect_container">
+                        <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://blog.kdm-manager.com';">
+                            <div class="art">
+                                <div class="art_inset">
+                                    <img src="/static/images/blogger.png"/>
+                                </div>
+                            </div>
+                            <div class="text">Visit the <b>Development blog</b>.</div>
+                        </div> <!-- settlement_event_grey_box -->
+                        <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://github.com/theLaborInVain/Advanced-KDM-Manager';">
+                            <div class="art">
+                                <div class="art_inset">
+                                    <img src="/static/images/github.png"/>
+                                </div>
+                            </div>
+                            <div class="text">Contribute on <b>GitHub</b>.</div>
+                        </div> <!-- settlement_event_grey_box -->
+                    </div><!-- lingering effect container -->
+
+                    <div class="settlement_event_lingering_effect_container">
+                        <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://twitter.com/kdmManager';">
+                            <div class="art">
+                                <div class="art_inset">
+                                    <img src="/static/images/twitter.png"/>
+                                </div>
+                            </div>
+                            <div class="text">Follow the Manager on <b>Twitter</b>!</div>
+                        </div> <!-- settlement_event_grey_box -->
+                        <div class="settlement_event_lingering_effect clickable" ng-click="ui.showAboutModal=false">
+                            <div class="art">
+                                <div class="art_inset">
+                                    <img src="/static/images/x.png"/>
+                                </div>
+                            </div>
+                            <div class="text">Close this window.</div>
+                        </div> <!-- settlement_event_grey_box -->
+                     </div>
+
                 </div>
-            </div> <!-- helpModal -->
-
-            <!-- end of the FOLD -->
-            <div id="loadingVeil" ng-if="ui.showLoadingVeil" class="ng-fade">
-                <div class="outer_circle"><img src="/static/images/loading.gif"></div>
             </div>
+        </div> <!-- aboutModal -->
 
-    </div><!-- container -->
+        <div id="helpModal" ng-if="ui.showHelpModal" class="ng-fade modal_container">
+            <div class="ui_modal settlement_event_gradient" ng-click="ui.showHelpModal=false">
+                <div class="settlement_event_modal_top">
+                    <h1>Password Reset</h1>
+                    <p class="subtitle">- Read these instuctions carefully! -</p>
+                </div>
+                <div class="settlement_event_modal_bottom">
+                    <p>Insturctions go here.</p>
+				</div>
+            </div><!-- ui_modal -->
+        </div> <!-- helpModal modal_container -->
+
 
     </body>
 

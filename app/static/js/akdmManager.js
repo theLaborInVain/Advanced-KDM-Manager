@@ -25,28 +25,20 @@ app.controller("rootController", function($scope, $http) {
 
     };
 
-    $scope.initAPI = function(url, port) {
-//        console.warn("API: " + api_url + ":" + api_port);
+    $scope.initAPI = function(url) {
 
-        // build the root scope API url based on input vars
-        var api_url = url;
-        if (port === parseInt(port, 10)) {
-            api_url = url + ":" + port
-        };
-
-        $scope.api_url = "https://" + api_url + "/"
+        // set it
+        $scope.api_url = url;
         
-        // now
+        // get it
         console.time("initAPI");
         $scope.apiGET("stat").then(
             function successCallback(response) {
                 $scope.api = response.data.meta.api;
                 $scope.api.url = $scope.api_url;
-                $scope.api.port = port;
                 console.log("API version " + $scope.api.version + " responding at " + $scope.api.url);
                 console.timeEnd("initAPI")
             }, function errorCallback(response) {
-                console.error('GET ' + req_url);
                 console.error(response);
                 console.timeEnd("initAPI");
                 return undefined;

@@ -1,9 +1,10 @@
 app.controller("loginController", function($scope) {
 
-    $scope.scratch = {
+    $scope.ui = {
+        showLoadingVeil: true,
         showAboutModal: false,
+        showSignupModal: false,
         showHelpModal: false,
-        showLoginFormPanel: true
     };
 
     $scope.showSignupForm = function() {

@@ -11,9 +11,9 @@
 
 /*  login controls */
 .login_controls_container {display: flex; flex-direction: column; flex-wrap: nowrap; }
-.login_control_panel {width: 100%} /* keeps the button widths uniform */
+.login_control_panel {width: 100%; margin-top: 0.6em; } /* keeps the button widths uniform */
 .remember_me {text-align: right; margin-top: -1em; }
-.login_field_error {margin: 1em; color: #600; display: block;}
+.login_field_error {margin: 1em; color: #600; display: block; margin-top: -1em; }
 
 /* login link bar */
 
