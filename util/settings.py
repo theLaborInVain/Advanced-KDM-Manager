@@ -34,7 +34,8 @@ def get_meta_dict():
     output = {}
 
     # application meta data
-    for key in ['title','version','api_url', 'desc', 'downtime_alert']:
-        output[key] = get('application',key)
+    for (key, value) in config.items('application'):
+        output[key] = get('application', key)
 
+#    akdm.logger.info(output)
     return output

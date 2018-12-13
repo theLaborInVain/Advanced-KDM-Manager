@@ -1,2 +1,13 @@
-.modal_container    {z-index: 100; }
-.ui_modal           {z-index: 101;}
+
+/*	effects	*/
+.ng-fade.ng-leave,
+    .ng-fade.ng-enter.ng-enter-active	{z-index: 1;}
+.ng-fade.ng-leave 						{z-index: -1;}
+
+/*	UI	*/
+.modal_container    					{z-index: 100; }
+.ui_modal           					{z-index: 101;}
+
+
+/* loading and modal */
+#loadingVeil                            {z-index: 1000;}

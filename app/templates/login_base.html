@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="akdmLogin" ng-controller="rootController">
+<html ng-app="akdmManager" ng-controller="rootController" ng-init="initAPI('{{api.url}}',{{api.port}})">
     <head>
 
         <!-- 
@@ -10,11 +10,15 @@
         -->
 
         <title>{{meta.title}}</title>
+        <meta name="theme-color" content="#{{meta.theme_color}}" />
 
         <!-- JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
-        <script src="/static/js/global.js"></script>
-        <script src="/static/js/login.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-animate.js"></script>
+
+        <script src="/static/js/global.js?v={{meta.version}}"></script>
+        <script src="/static/js/akdmManager.js?v={{meta.version}}"></script>
+        <script src="/static/js/login.js?v={{meta.version}}"></script>
 
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="/static/css/fonts.css?v={{meta.version}}">
@@ -28,106 +32,117 @@
 
     </head>
 
-    <body class="paper_gradient">
+    <body ng-controller="loginController" class="paper_gradient">
 
         <div class="login_header">
             - Welcome -
-        </div><!-- footer -->
+        </div><!-- header -->
 
-        <div class="login_splash">
-            <h2>Advanced</h2>
-            <h1>KDM Manager</h1>
-            <p>The next generation of the original campaign manager for <i>Monster</i> by Kingdom Death!</p>
-            <hr ng-init="test()"/>
-    
-            {% block content %}{% endblock %}
+        <div id="container">
 
-            <hr/>
-            <div class="login_link_bar">
-                <a onClick="showHide('aboutModal')">About</a>
-                <a onClick="showHide('helpModal')">Forgot Password?</a>
+            <div class="login_splash">
+                <h2>Advanced</h2>
+                <h1>KDM Manager</h1>
+                <p>The next generation of the original campaign manager for <i>Monster</i> by Kingdom Death!</p>
+                <hr/>
+
+    	        {% with messages = get_flashed_messages() %}
+	    	        {% if messages %}
+		    	        <ul>
+    			            {% for message in messages %}
+	    			            <li>{{ message }}</li>
+		    	            {% endfor %}
+    			        </ul>
+	    	        {% endif %}
+	            {% endwith %}  
+
+                {% block content %}{% endblock %}
+
             </div>
 
-        </div>
-
-        <div class="login_footer">
-            <a href="https://thelaborinvain.com" target="top">Developed by: The Labor in Vain &nbsp;<b>2018-2019</b></a>
-        </div><!-- footer -->
+            <div class="login_footer">
+                <a href="https://thelaborinvain.com" target="top">Developed by: The Labor in Vain &nbsp;<b>2018-2019</b></a>
+            </div><!-- footer -->
 
 
 
-        <!-- the FOLD starts here -->
+            <!-- the FOLD starts here -->
 
-        <div id="aboutModal" class="modal_container hidden">
-            <div class="ui_modal settlement_event_gradient">
-                <div class="settlement_event_modal_top">
-                    <h1>Advanced KDM Manager</h1>
-                    <p class="subtitle">- version {{meta.version}} -</p>
-                </div>
-                <div class="settlement_event_modal_bottom">
-                    <p>
-                        Advanced KDM Manager is an interactive campaign management service designed for use with <i><a href="https://shop.kingdomdeath.com/collections/sold-out/products/kingdom-death-monster" target="top">Monster</a></i>, by <a href="http://kingdomdeath.com" target="top">Kingdom Death</a>.
-                    </p>
-                    <p>
-                        Advanced KDM Manager and the <a href="http://api.thewatcher.io" target="top">the KD:M API</a> are developed, maintained, published, supported and provisioned by <a href="http://thelaborinvain.com">The Labor in Vain.</a>
-                    </p>
-                    <p>
-                        Neither the Advanced KDM Manager service nor any of the software utilized by the service are developed, maintained, authorized or in any other way supported by or affiliated with <a href="http://kingdomdeath.com" target="top">Kingdom Death</a> or Adam Poots Games, LLC.
-                    </p>
-
-                    <div class="settlement_event_lingering_effect_hr">
-                        Thanks for using the Manager!
+            <div id="aboutModal" ng-if="scratch.showAboutModal" class="ng-fade modal_container">
+                <div class="ui_modal settlement_event_gradient">
+                    <div class="settlement_event_modal_top">
+                        <h1>Advanced KDM Manager</h1>
+                        <p class="subtitle">- version {{meta.version}} -</p>
                     </div>
+                    <div class="settlement_event_modal_bottom">
+                        <p>
+                            Advanced KDM Manager is an interactive campaign management service designed for use with <i><a href="https://shop.kingdomdeath.com/collections/sold-out/products/kingdom-death-monster" target="top">Monster</a></i>, by <a href="http://kingdomdeath.com" target="top">Kingdom Death</a>.
+                        </p>
+                        <p>
+                            Advanced KDM Manager and the <a href="http://api.thewatcher.io" target="top">the KD:M API</a> are developed, maintained, published, supported and provisioned by <a href="http://thelaborinvain.com">The Labor in Vain.</a>
+                        </p>
+                        <p>
+                            Neither the Advanced KDM Manager service nor any of the software utilized by the service are developed, maintained, authorized or in any other way supported by or affiliated with <a href="http://kingdomdeath.com" target="top">Kingdom Death</a> or Adam Poots Games, LLC.
+                        </p>
 
-                    <div class="settlement_event_lingering_effect_container">
-                        <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://blog.kdm-manager.com';">
-                            <div class="art">
-                                <div class="art_inset">
-                                    <img src="/static/images/blogger.png"/>
-                                </div>
-                            </div>
-                            <div class="text">Visit the <b>Development blog</b>.</div>
-                        </div> <!-- settlement_event_grey_box -->
-                        <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://github.com/theLaborInVain/Advanced-KDM-Manager';">
-                            <div class="art">
-                                <div class="art_inset">
-                                    <img src="/static/images/github.png"/>
-                                </div>
-                            </div>
-                            <div class="text">Contribute on <b>GitHub</b>.</div>
-                        </div> <!-- settlement_event_grey_box -->
-                    </div><!-- lingering effect container -->
+                        <div class="settlement_event_lingering_effect_hr">
+                            Thanks for using the Manager!
+                        </div>
 
-                    <div class="settlement_event_lingering_effect_container">
-                        <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://twitter.com/kdmManager';">
-                            <div class="art">
-                                <div class="art_inset">
-                                    <img src="/static/images/twitter.png"/>
+                        <div class="settlement_event_lingering_effect_container">
+                            <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://blog.kdm-manager.com';">
+                                <div class="art">
+                                    <div class="art_inset">
+                                        <img src="/static/images/blogger.png"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="text">Follow the Manager on <b>Twitter</b>!</div>
-                        </div> <!-- settlement_event_grey_box -->
-                        <div class="settlement_event_lingering_effect clickable" onClick="showHide('aboutModal')">
-                            <div class="art">
-                                <div class="art_inset">
-                                    <img src="/static/images/x.png"/>
+                                <div class="text">Visit the <b>Development blog</b>.</div>
+                            </div> <!-- settlement_event_grey_box -->
+                            <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://github.com/theLaborInVain/Advanced-KDM-Manager';">
+                                <div class="art">
+                                    <div class="art_inset">
+                                        <img src="/static/images/github.png"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="text">Close this window.</div>
-                        </div> <!-- settlement_event_grey_box -->
-                     </div>
+                                <div class="text">Contribute on <b>GitHub</b>.</div>
+                            </div> <!-- settlement_event_grey_box -->
+                        </div><!-- lingering effect container -->
 
+                        <div class="settlement_event_lingering_effect_container">
+                            <div class="settlement_event_lingering_effect clickable" onClick="location.href='https://twitter.com/kdmManager';">
+                                <div class="art">
+                                    <div class="art_inset">
+                                        <img src="/static/images/twitter.png"/>
+                                    </div>
+                                </div>
+                                <div class="text">Follow the Manager on <b>Twitter</b>!</div>
+                            </div> <!-- settlement_event_grey_box -->
+                            <div class="settlement_event_lingering_effect clickable" ng-click="scratch.showAboutModal=false">
+                                <div class="art">
+                                    <div class="art_inset">
+                                        <img src="/static/images/x.png"/>
+                                    </div>
+                                </div>
+                                <div class="text">Close this window.</div>
+                            </div> <!-- settlement_event_grey_box -->
+                         </div>
+
+                    </div>
                 </div>
-            </div>
-        </div> <!-- aboutModal -->
+            </div> <!-- aboutModal -->
 
-        <div id="helpModal" class="modal_container hidden">
-            <div class="ui_modal" onClick="showHide('helpModal')">
-                <h1>Help!</h1>
-            </div>
-        </div> <!-- helpModal -->
+            <div id="helpModal" ng-if="scratch.showHelpModal" class="ng-fade modal_container">
+                <div class="ui_modal" ng-click="showHelpModal=false">
+                    <h1>Help!</h1>
+                </div>
+            </div> <!-- helpModal -->
 
-        <!-- end of the FOLD -->
+            <!-- end of the FOLD -->
+            <div id="loadingVeil" ng-if="ui.showLoadingVeil" class="ng-fade">
+                <div class="outer_circle"><img src="/static/images/loading.gif"></div>
+            </div>
+
+    </div><!-- container -->
 
     </body>
 

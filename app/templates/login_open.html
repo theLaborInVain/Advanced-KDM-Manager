@@ -2,57 +2,47 @@
 
 {% block content %}
 
-    <div class="login_controls_container" ng-controller="loginController">
+    <div class="login_controls_container">
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-
-        <button
-            id="loginSignupButton"
-            class="kd_ui_button"
-            ng-click="showSignupForm()"
-        >
-            Sign Up
-        </button>
-
-        <button
-            id="loginLoginButton"
-            class="kd_ui_button kd_ui_button_blue"
-            ng-click="showLoginForm()"
-        >
-            LOGIN
-        </button>
-
-        <div id="loginLoginFormPanel" class="login_control_panel hidden">
+        <div id="loginLoginFormPanel" ng-if="scratch.showLoginFormPanel" class="ng-fade login_control_panel">
 
             <form action="" method="post" novalidate>
+
                 {{ form.hidden_tag() }}
+
                 <p>
-                    {{ form.username.label(class_='login_control_panel_label') }}<br>
-                    {{ form.username(size=32, class_='login_control_panel_input') }}
-                </p>
-                <p>
-                    {{ form.password.label(class_='login_control_panel_label') }}<br>
-                    {{ form.password(size=32, class_='login_control_panel_input') }}
+                    {{ form.username(size=32, autofocus='autofocus', placeholder='email') }}
+                    {% for error in form.username.errors %}
+                        <span class="login_field_error">[{{ error }}]</span>
+                    {% endfor %}
                 </p>
 
+                <p>
+                    {{ form.password(size=32, placeholder='password') }}
+                    {% for error in form.password.errors %}
+                        <span class="login_field_error">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
 
                 <p class="remember_me">
                     {{ form.remember_me() }}
                     {{ form.remember_me.label(class_='login_control_panel_label checkbox_label') }}
                 </p>
+
                 <p>{{ form.submit(class_='kd_ui_button kd_ui_button_blue')}}</p>
+
             </form>
 
         </div>
         
     </div> <!-- downtime_container -->
+
+    <hr/>
+
+    <div class="login_link_bar">
+	    <a ng-click="scratch.showAboutModal=true">About</a>
+	    <a ng-click="scratch.showSignupModal=true">Sign Up!</a>
+        <a ng-click="scratch.showHelpModal=true">Forgot Password?</a>
+    </div>
 
 {% endblock %}

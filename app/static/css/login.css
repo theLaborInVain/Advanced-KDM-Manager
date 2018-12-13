@@ -1,10 +1,9 @@
 
 /*  splash    */
 .login_splash {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -70%);
+  position: absolute;
+  top: 7%;
+  transform: translate(25%, 0%);
     width: 65%;
 }
 .login_splash h1 {font-size: 12vw; text-align: center; margin: 0; margin-top: -2%; }
@@ -12,18 +11,17 @@
 
 /*  login controls */
 .login_controls_container {display: flex; flex-direction: column; flex-wrap: nowrap; }
-.remember_me {text-align: right; }
-
-/*  downtime container */
-.downtime_container {}
-
-.login_control_panel_label {font-weight: bold; font-size: 1.1em; padding-left: 0.5em; }
-.login_control_panel_input {font-size: 1.5em; border: 0; border-bottom: 1px solid; width: 95%; padding: 0.5em; }
-.login_control_panel_input:focus {outline: none; }
+.login_control_panel {width: 100%} /* keeps the button widths uniform */
+.remember_me {text-align: right; margin-top: -1em; }
+.login_field_error {margin: 1em; color: #600; display: block;}
 
 /* login link bar */
 
 .login_link_bar {display: flex; flex-direction: row; justify-content: space-between; }
+
+
+/*  downtime container */
+.downtime_container {}
 
 /*  header and footer   */
 
