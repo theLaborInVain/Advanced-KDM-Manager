@@ -22,7 +22,7 @@ Install and start an instance of the dev server:
 ## Install
 `install.sh` is not executable by default. Do not execute it directly!
 
-    # apt-get install python3-venv
+    # apt-get install -y nginx python3 python3-venv python3-dev supervisor
     $ source install.sh
 
 ## Run the dev server

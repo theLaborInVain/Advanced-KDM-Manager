@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-CMD="flask run"
-
 DEV_API_URL=192.168.0.110
 DEV_API_PORT=8013
-
 
 #
 #   This is how we spin up the virtual environment for the server to run in
@@ -27,9 +24,11 @@ start_venv() {
     echo -e " * $PYTHON_PATH"
     echo -e " * Python $PYTHON_VERS"
     echo -e " * FLASK_ENV=$FLASK_ENV"
+    echo -e " * API_URK=$API_URL"
     echo -e "\nPIP:"
     pip freeze $1 | while read x; do echo -e " * $x"; done
     echo -e
+    echo -e "Flask server:"
 }
 
 
@@ -40,14 +39,8 @@ start_venv() {
 case "$1" in
     dev)
         start_venv development $DEV_API_URL $DEV_API_PORT
-        echo -e "Flask server:"
-        $CMD --host=0.0.0.0 --port=8015
+        flask run --host=0.0.0.0 --port=8015
         ;;
-#    disable)
-#        stop_service
-#        $CMD disable $SERVICE
-#        $CMD disable $SOCKET
-#        ;;
 #    start)
 #        start_service
 #        ;;
@@ -63,7 +56,7 @@ case "$1" in
 #        $CMD status $SOCKET
 #        ;;
     *)
-        echo "Usage: $NAME {dev}" >&2
+        echo "Usage: $NAME {dev|prod}" >&2
         exit 3
 esac
 
