@@ -1,5 +1,6 @@
 
 /*  splash    */
+a.splash_anchor {text-decoration: none}
 .login_splash {
   position: absolute;
   top: 7%;

@@ -22,6 +22,7 @@ input[type=text]:focus,
 
 
 /*  Login effects   */
+a.splash_anchor {color: #000;}
 .login_control_panel_input {background: transparent; border-bottom-color: #666; color: #333;}
 .login_control_panel_input:focus {outline: none; border-bottom-color: #ff52de; color: #000; }
 

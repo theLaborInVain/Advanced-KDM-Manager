@@ -24,7 +24,7 @@ start_venv() {
     echo -e " * $PYTHON_PATH"
     echo -e " * Python $PYTHON_VERS"
     echo -e " * FLASK_ENV=$FLASK_ENV"
-    echo -e " * API_URK=$API_URL"
+    echo -e " * API_URL=$API_URL"
     echo -e "\nPIP:"
     pip freeze $1 | while read x; do echo -e " * $x"; done
     echo -e
@@ -39,10 +39,12 @@ start_venv() {
 case "$1" in
     dev)
         start_venv development $DEV_API_URL $DEV_API_PORT
-        flask run --host=0.0.0.0 --port=8015
+#        flask run --host=0.0.0.0 --port=8015
+        python akdm.py
         ;;
 #    start)
 #        start_service
+#   unicorn --certfile cert.pem --keyfile key.pem -b 0.0.0.0:8000 hello:app
 #        ;;
 #    stop)
 #        stop_service
