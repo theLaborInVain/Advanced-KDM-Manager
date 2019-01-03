@@ -34,11 +34,12 @@
 
     <body ng-controller="loginController" class="paper_gradient">
 
-        <div class="login_header">
-            - Welcome -
-        </div><!-- header -->
 
         <div id="container">
+        
+            <div class="header">
+                - Welcome -
+            </div><!-- header -->
 
             <div class="login_splash">
 
@@ -52,11 +53,9 @@
 
     	        {% with messages = get_flashed_messages() %}
 	    	        {% if messages %}
-		    	        <ul>
-    			            {% for message in messages %}
-	    			            <li>{{ message }}</li>
-		    	            {% endfor %}
-    			        </ul>
+ 			            {% for message in messages %}
+	    			        <div class="flashed_message affinity_red_text">{{ message }}</div>
+	    	            {% endfor %}
 	    	        {% endif %}
 	            {% endwith %}  
 
@@ -64,7 +63,7 @@
 
             </div><!-- login_splash -->
 
-            <div class="login_footer">
+            <div class="footer">
                 <a href="https://thelaborinvain.com" target="top">Developed by: The Labor in Vain &nbsp;<b>2018-2019</b></a>
             </div><!-- footer -->
 

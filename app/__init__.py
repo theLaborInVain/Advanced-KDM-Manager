@@ -15,11 +15,17 @@
 
 import os
 import flask
+from flask_login import LoginManager
 
 # initialize the flask app; set flask 'magic' config attribs
 akdm = flask.Flask(__name__)
 akdm.config['SECRET_KEY'] = os.urandom(24)
 akdm.config['SESSION_COOKIE_NAME'] = 'akdm_session'
+
+# middleware
+login = LoginManager(akdm)
+login.login_view = 'login'
+akdm.config['TESTING'] = False  # setting this to True disables @login_required
 
 # set the API info from env variables initialized when the
 #   server was started
@@ -36,3 +42,5 @@ if "API_PORT" in os.environ:
 
 if os.environ['FLASK_ENV'] in ['development']:
     akdm.config['api']['verify_ssl'] = False
+
+from app import routes

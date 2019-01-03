@@ -1,12 +1,7 @@
 
 /*  splash    */
 a.splash_anchor {text-decoration: none}
-.login_splash {
-  position: absolute;
-  top: 7%;
-  transform: translate(25%, 0%);
-    width: 65%;
-}
+.login_splash {width: 65%; margin-bottom: 10em; }
 .login_splash h1 {font-size: 12vw; text-align: center; margin: 0; margin-top: -2%; }
 .login_splash h2 {font-size: 11vw; text-align: center; letter-spacing: 0.05em; margin-bottom: 0; }
 
@@ -20,15 +15,9 @@ a.splash_anchor {text-decoration: none}
 
 .login_link_bar {display: flex; flex-direction: row; justify-content: space-between; }
 
+/* misc. UI */
+.flashed_message {margin: 1em; margin-bottom: 0; text-align: center; transition: 1s; font-weight: bold; }
 
 /*  downtime container */
 .downtime_container {}
 
-/*  header and footer   */
-
-.login_header, .login_footer {position: absolute; left: 10%; right: 10%; height: 2%; padding: 1%; }
-.login_header, .login_footer a {text-decoration: none; color: #111; font-size: 0.9em; }
-.login_header, .login_footer a b {font-size: 0.85em; }  /* because Ruda numbers are fucking gigantic */
-
-.login_header {top: 0; text-align: center; border-bottom: 1px solid #aaa; }
-.login_footer {bottom: 0; text-align: right; border-top: 1px solid #aaa; padding-right: 0; }

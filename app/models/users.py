@@ -4,24 +4,93 @@
 
 """
 
-from . import Model
+from bson.objectid import ObjectId
+from flask_login import UserMixin
+import requests
 
-class User(Model):
+from app import akdm, login
+
+@login.user_loader
+def load_user(_id):
+    return User(_id=_id)
+
+
+class User(UserMixin):
 
     """ We define a user model in the app that includes data from the KDM API,
     which also lets us manage user information. """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, _id=None, username=None, password=None, token=None):
+        """ Initializing a user requires a username and password. Upon init,
+        the self.login() method is called, which sets self.token and the rest
+        of the user object's attribs, etc. """
 
-        """ Generic __init__() method that sets the mandatory attribs and
-        uses the base class load() method to initialize itself. """
+        self._id = _id
+        self.username = username
+        self.password = password
+        self.token = token
 
-        self.collection = 'users'
-        super(User, self).__init__(*args, **kwargs)
+        # LoginManager attribs
+#        self.is_authenticated = False
+#        self.is_active = False
+#        self.is_anonymous = False
+
+
+#    def __repr__(self):
+#        return self.get_id()
+
 
     def new(self):
 
         """ Creates a new user, saves it to the MDB, calls the base class
         load() method, i.e. initializes the object. """
 
-        self.save()
+#        self.save()
+
+
+    def login(self):
+        """ Hits the /login endpoint of the API and sets the self._id and
+        self.token attribute, which is currently a JWT token. """
+
+        # set the API endpoint and POST the username/password to it
+        endpoint = akdm.config['api']['url'] + 'login'
+        response = requests.post(
+            endpoint,
+            verify = akdm.config['api']['verify_ssl'],
+            json= {
+                'username': self.username,
+                'password': self.password
+            }
+        )
+
+        # if the response is bad, return false and the response
+        if response.status_code != 200:
+            return False, response
+        else:
+            user = response.json()
+            self._id = ObjectId(user['_id'])
+            self.token = user['access_token']
+            return True
+
+    def get_id(self):
+        """ Required for Flask-Login; also just a good idea. """
+        return str(self._id)
+
+
+
+    def refresh_token(self):
+        """ Contacts the API to refresh the token. """
+
+        # set the API endpoint and post the Authorization header to it
+        endpoint = akdm.config['api']['url'] + 'authorization/refresh'
+        response = requests.post(
+            endpoint,
+            verify = akdm.config['api']['verify_ssl'],
+            headers = {'Authorization': self.token},
+        )
+
+        if response.status_code == 200:
+            self.token = response.json()['access_token']
+            return True
+
+        return False

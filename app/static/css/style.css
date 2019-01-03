@@ -2,7 +2,6 @@
 
 html {height: 100%; font-family: 'Ruda', sans-serif; font-size: 25px; }
 body {height: 100%; transition: 1s; margin: 0 auto; }
-#container {min-height: 100%; position: relative; background: transparent; margin: 0 auto; }
 
 h1, h2, h3 {font-family: 'Silverado', sans-serif; letter-spacing: 0.03em; }
 button, input[type=submit]{font-family: 'Silverado', sans-serif; letter-spacing: 0.05em; transition: 1s;  }
@@ -28,10 +27,6 @@ input[type=text]:focus,
     input[type=email]:focus,
     input[type=password]:focus {outline: none; transition: 1s; padding-left: 1.5em; }
 
-    /*  elements styled by ID  - l33t shit  */
-#loadingVeil {position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9);}
-#loadingVeil div.outer_circle {height: 30vw; width: 30vw; position: fixed; top: 25%; left: 50%; transform: translate(-50%, 50%); background: #111; border-radius: 100%; overflow: hidden; border: 0.3em solid #000; display: flex; justify-content: center; align-items: center; box-shadow: 0px 0px 6em 1em; }
-#loadingVeil div img {height: 120%; }
 
     /*  global effects and meta styles  */
 .clickable {cursor: pointer; }
@@ -48,6 +43,21 @@ input[type=text]:focus,
 	.ng-fade.ng-enter.ng-enter-active {opacity: 1;}
 .ng-fade.ng-leave {position: absolute;}
 
+    /*  header/footer */
+
+.header, .footer {height: 1em; padding: 1%; width: 95%; }
+.header, .footer a {text-decoration: none; color: #111; font-size: 0.9em; }
+.header, .footer a b {font-size: 0.85em; }  /* because Ruda numbers are fucking gigantic */
+
+.header {text-align: center; border-bottom: 1px solid #aaa; }
+.footer {text-align: right; border-top: 1px solid #aaa; padding-right: 0; }
+
+    /*  UI elements selected by ID - teh l33t d3v shit  */
+#container {background: transparent; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+
+#loadingVeil {position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9);}
+#loadingVeil div.outer_circle {height: 30vw; width: 30vw; position: fixed; top: 25%; left: 50%; transform: translate(-50%, 50%); background: #111; border-radius: 100%; overflow: hidden; border: 0.3em solid #000; display: flex; justify-content: center; align-items: center; box-shadow: 0px 0px 6em 1em; }
+#loadingVeil div img {height: 120%; }
 
     /* the modal shit show */
 
@@ -90,6 +100,8 @@ input[type=text]:focus,
 .settlement_event_lingering_effect .art_inset {width: 85%; height: 85%; border-radius: 100%; display: flex; align-items: center; align-items: center; justify-content: center; }
 .settlement_event_lingering_effect .art_inset img {width: 80%; filter: sepia(100%); }
 .settlement_event_lingering_effect .text {width: 50%; text-align: left;  }
+
+
 
 /* 
 
