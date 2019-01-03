@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="akdmManager" ng-controller="rootController" ng-init="initAPI('{{api.url}}')">
+    <head>
+
+        <!-- 
+
+            This is the "parent" template for the dashboard app! 
+
+        -->
+
+        <title>{{meta.title}}</title>
+        <meta name="theme-color" content="#{{meta.theme_color}}" />
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-animate.js"></script>
+
+        <script src="/static/js/global.js?v={{meta.version}}"></script>
+        <script src="/static/js/akdmManager.js?v={{meta.version}}"></script>
+        <script src="/static/js/dashboard.js?v={{meta.version}}"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="/static/css/fonts.css?v={{meta.version}}">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css?v={{meta.version}}">
+        <link rel="stylesheet" type="text/css" href="/static/css/dashboard.css?v={{meta.version}}">
+        <link rel="stylesheet" type="text/css" href="/static/css/z-index.css?v={{meta.version}}">
+        <link rel="stylesheet" type="text/css" href="/static/css/color.css?v={{meta.version}}">
+
+        <!-- fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Ruda" rel="stylesheet">
+
+    </head>
+
+    <body ng-controller="dashboardController" class="paper_gradient">
+
+
+        <div id="container">
+        
+            <div class="header">
+                - AKDM Manager: Dashboard -
+            </div><!-- header -->
+
+            Dash goes here!
+
+            <div class="footer">
+                Logged in as {{current_user._id}}
+            </div><!-- footer -->
+
+        </div><!-- container -->
+
+
+        <!-- dashboard app modals start here! -->
+
+        <!-- end dashboard app modals -->
+
+    </body>
+
+
+</html>
