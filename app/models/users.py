@@ -20,10 +20,14 @@ class User(UserMixin):
     """ We define a user model in the app that includes data from the KDM API,
     which also lets us manage user information. """
 
-    def __init__(self, _id=None, username=None, password=None, token=None):
+    def __init__(self, *, _id=None, username=None, password=None, token=None):
         """ Initializing a user requires a username and password. Upon init,
         the self.login() method is called, which sets self.token and the rest
-        of the user object's attribs, etc. """
+        of the user object's attribs, etc.
+
+        Also, positional arguments are banned, so be sure to use kwargs when
+        initializing a user object.
+        """
 
         self._id = _id
         self.username = username
@@ -42,10 +46,27 @@ class User(UserMixin):
 
     def new(self):
 
-        """ Creates a new user, saves it to the MDB, calls the base class
-        load() method, i.e. initializes the object. """
+        """ Creates a new user via API call. Always returns TWO things:
+            - a boolean of whether the job was successful
+            - the server's response
 
-#        self.save()
+        """
+
+        endpoint = akdm.config['api']['url'] + 'new/user'
+        response = requests.post(
+            endpoint,
+            verify = akdm.config['api']['verify_ssl'],
+            json= {
+                'username': self.username,
+                'password': self.password
+            }
+        )
+        if response.status_code != 200:
+            return False, response.text
+        else:
+            return True, response.text
+
+        return False, "I AM ERROR"
 
 
     def login(self):

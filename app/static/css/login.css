@@ -2,8 +2,8 @@
 /*  splash    */
 a.splash_anchor {text-decoration: none}
 .login_splash {width: 65%; margin-bottom: 10em; }
-.login_splash h1 {font-size: 12vw; text-align: center; margin: 0; margin-top: -2%; }
-.login_splash h2 {font-size: 11vw; text-align: center; letter-spacing: 0.05em; margin-bottom: 0; }
+.login_splash h1 {font-size: 8vw; text-align: center; margin: 0; margin-top: -2%; text-transform: uppercase; font-weight: normal; }
+.login_splash h2 {font-size: 15vw; text-align: center; letter-spacing: 0.05em; margin-bottom: 0; text-transform: uppercase; font-weight: normal; }
 
 /*  login controls */
 .login_controls_container {display: flex; flex-direction: column; flex-wrap: nowrap; }

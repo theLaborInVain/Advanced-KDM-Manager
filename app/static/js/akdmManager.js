@@ -8,12 +8,14 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
 
 app.controller("rootController", function($scope, $http) {
 
+    $scope.cur_date = new Date();
+
     $scope.ui = {
         showLoadingVeil: true
     };
 
 
-    $scope.apiGET = function(endpoint) {
+    $scope.apiGET = function(endpoint, token) {
         // returns a promise!
 
         var req_url = $scope.api_url + endpoint;
@@ -22,10 +24,13 @@ app.controller("rootController", function($scope, $http) {
             method: 'GET',
             url: $scope.api_url + endpoint,
             headers: {
-                'Content-Type': undefined
+                'Content-Type': undefined,
+                'Authorization': $scope.access_token
                 },
             data: { test: 'test' }
         }
+
+		console.warn(req_url);
 
         return $http(req)
 
@@ -37,22 +42,39 @@ app.controller("rootController", function($scope, $http) {
         $scope.api_url = url;
         
         // get it
-        console.time("initAPI");
+        console.time($scope.api_url + 'stat');
         $scope.apiGET("stat").then(
             function successCallback(response) {
                 $scope.api = response.data.meta.api;
                 $scope.api.url = $scope.api_url;
                 console.log("API version " + $scope.api.version + " responding at " + $scope.api.url);
-                console.timeEnd("initAPI")
+                console.timeEnd($scope.api_url + 'stat')
             }, function errorCallback(response) {
                 console.error(response);
-                console.timeEnd("initAPI");
+                console.timeEnd($scope.api_url + 'stat')
                 return undefined;
             }
         );
     };
 
 
+    $scope.initSession = function(user_id) {
+        $scope.user_id = user_id;
+        $scope.access_token = getCookie("akdm_token");
+
+        console.time($scope.api_url + "user/get/" + $scope.user_id);
+        $scope.apiGET('user/get/' + $scope.user_id).then(
+            function successCallback(response) {
+                $scope.user = response.data.user;
+        		console.timeEnd($scope.api_url + "user/get/" + $scope.user_id);
+            }, function errorCallback(response) {
+                console.error(response);
+        		console.timeEnd($scope.api_url + "user/get/" + $scope.user_id);
+            }        
+        );
+
+
+    };
 
 }) // rootController
 

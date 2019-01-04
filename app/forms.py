@@ -27,4 +27,24 @@ class LoginForm(FlaskForm):
 
     password = PasswordField('Password', validators=[validators.DataRequired()])
     remember_me = BooleanField('Remember Me')
-    submit = SubmitField('LOGIN')
+    submit = SubmitField('Log in')
+
+
+class SignupForm(FlaskForm):
+
+    """ Generic signup form: requires the email and the password 2x, etc. """
+
+    username = StringField('Username', validators=[
+        validators.DataRequired(),
+        validators.Email(),
+        validators.Optional(strip_whitespace=True)
+    ])
+
+    password = PasswordField('New Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+
+    confirm = PasswordField('Password Again')
+
+    submit = SubmitField('Sign up')

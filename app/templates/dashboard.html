@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="akdmManager" ng-controller="rootController" ng-init="initAPI('{{api.url}}')">
+<html ng-app="akdmManager" ng-controller="rootController" ng-init="initAPI('{{api.url}}'); initSession('{{current_user._id}}')">
     <head>
 
         <!-- 
@@ -40,16 +40,63 @@
                 - AKDM Manager: Dashboard -
             </div><!-- header -->
 
-            Dash goes here!
+            <button
+				class="kd_ui_button kd_ui_button_blue"
+				ng-if="user.login !== undefined"
+				ng-click="ui.showProfileModal=true"
+			>
+				Profile
+			</button>
 
             <div class="footer">
-                Logged in as {{current_user._id}}
+                {a user.login a}
             </div><!-- footer -->
 
         </div><!-- container -->
 
 
         <!-- dashboard app modals start here! -->
+
+
+        <div id="profileModal" ng-if="ui.showProfileModal" class="ng-fade modal_container" ng-init="loadUserDashboard()">
+            <div class="ui_modal settlement_location_gradient" ng-click="ui.showProfileModal=false">
+
+                <div class="settlement_location_modal_top">
+                    <h1>User Profile</h1>
+                </div>
+
+                <div class="settlement_location_modal_middle">
+
+                    <div class="settlement_location_item_container">
+
+                        <div class="settlement_location_item_graphic">
+                            <img class="profile_gravatar" src="https://www.gravatar.com/avatar/{a user.gravatar_hash a}" />
+                        </div> <!-- settlement_location_Graphic -->
+                        <div class="settlement_location_item_name"><p>{a user.login a}</p></div>
+                        <div class="settlement_location_item_recipe">
+
+                            <p ng-if="user.subscriber.level === 0">Registered user</p>
+                            <p ng-if="user.subscriber.level > 0">{a user.subscriber.desc a}</p>
+                        
+                        </div>
+                    </div> <!-- settlement_location_item_container -->
+
+                </div><!-- settlement_location_modal_middle -->
+
+                <div class="settlement_location_modal_bottom">
+                    <h2>User Statistics</h2>
+                    <p>Registered user since {a user.created_on.$date|date:'yyyy-MM-dd' a}, <b>{a user.age a}</b> ago.</p>
+                    <p ng-if="user.subscriber.level > 0"><b>{a user.subscriber.desc a}</b> subscriber since {a user.subscriber.created_on.$date|date:'yyyy-MM-dd' a}, <b>{a user.subscriber.age a}</b> ago!</p>
+                    <p>Settlements created: <b>{a user.settlements_created a}</b>.</p>
+                    <p>Survivors created: <b>{a user.survivors_created a}</b>.</p>
+                    <p>{a user.dashboard.friends a}</p>
+    		    	<a href="/logout"><button class="kd_ui_button kd_ui_button_grey">Log out</button></a>
+
+                </div><!-- settlement_location_modal_bottom -->
+                       
+            </div><!-- ui_modal -->
+        </div> <!-- helpModal modal_container -->
+
 
         <!-- end dashboard app modals -->
 

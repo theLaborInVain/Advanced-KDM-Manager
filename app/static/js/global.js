@@ -1,3 +1,5 @@
+"use strict";
+
 function showHide(e_id, force) {
     // This is the global method that all application JS uses to hide or un-hide
     // an HTML element by using its ID value. The "visible" and "force" stuff
@@ -36,4 +38,21 @@ function showHide(e_id, force) {
 //        return true;
 //    };
 
- }
+}
+
+
+// w3c schools getCookie() method
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}

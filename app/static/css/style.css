@@ -1,12 +1,18 @@
 /*    General style, element-level    */
 
-html {height: 100%; font-family: 'Ruda', sans-serif; font-size: 25px; }
+html {height: 100%; font-family: 'Ruda', sans-serif; font-size: 26px; }
 body {height: 100%; transition: 1s; margin: 0 auto; }
 
 h1, h2, h3 {font-family: 'Silverado', sans-serif; letter-spacing: 0.03em; }
-button, input[type=submit]{font-family: 'Silverado', sans-serif; letter-spacing: 0.05em; transition: 1s;  }
+button, input[type=submit]{font-family: 'Ruda', sans-serif; letter-spacing: 0.05em; transition: 1s;  }
 button:focus, input[type=submit] {outline: none; }
 
+hr {width: 100%;}
+
+a {text-decoration: none; color: #000; }
+a:active,
+ button:active,
+ .clickable:active {transform: translate(3px,3px); transition: 0.1s}
 
     /*      KD Rulebook Bullet reset    */
 ul {list-style: none; margin-left: 0; padding-left: 0;}
@@ -76,10 +82,28 @@ input[type=text]:focus,
     border: 1px solid #999;
 }
 
+
 /* KD buttons */
 
 .kd_ui_button {border: 0.3em solid; padding: 0.5em; border-width: 0.3em; border-radius: 666em; margin: 0 auto; margin: 0.5em; font-size: 1.2em; font-weight: bold; width: 95%; }
 
+/* rulebook styles */
+
+.rulebook_headline {width: 85%; border-top: 1px solid; border-bottom: 1px solid; margin: 1em auto; text-align: center; padding-bottom: 1em; margin-top: 1.5em;}
+.rulebook_headline h1 {font-size: 2.5em; text-transform: uppercase; font-weight: normal; margin-bottom: 0; }
+
+/* settlement location card styles */
+.settlement_location_modal_top {text-align: center; height: 30%; border-radius: inherit; }
+.settlement_location_modal_top h1 {font-size: 3em; font-weight: normal; }
+.settlement_location_modal_middle {display: flex; flex-direction: column; flex-wrap: nowrap; }
+.settlement_location_item_container {border-radius: 1em; padding: 0; width: 90%; margin: 1em auto; display: flex; flex-direction: row; justify-content: space-between; height: 5.5vh; }
+.settlement_location_item_graphic {width: 13%; border-radius: 0.5em; display: flex; justify-content: center; align-items: center; overflow: hidden;}
+.profile_gravatar {border-radius: inherit; flex-shrink: 0; min-width: 93%; }
+.settlement_location_item_name {width: 52%; display: flex; align-items: center; font-size: 1.1em; }
+.settlement_location_item_recipe {width: 30%; border-radius: inherit; border-top-left-radius: 0; border-bottom-left-radius: 0; display: flex; align-items: center; justify-content: center; font-weight: bold;  }
+.settlement_location_modal_bottom {border-radius: inherit; border-top-left-radius: 0; border-top-right-radius: 0;}
+.settlement_location_modal_bottom h2 {margin: 1em; font-size: 2.1em; font-family: 'Arial'; margin-bottom: 0; font-weight: normal; }
+.settlement_location_modal_bottom p {margin-left: 1.5em; margin-right: 1.5em; }
 
 /* settlement event card styles */
 

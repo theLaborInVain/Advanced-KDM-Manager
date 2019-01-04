@@ -12,10 +12,11 @@ import requests
 import werkzeug
 
 from app import akdm
-from app.forms import LoginForm
+from app.forms import LoginForm, SignupForm
 
 from app.models import users
 
+import util
 from util import settings
 
 
@@ -24,6 +25,7 @@ from util import settings
 #
 
 @akdm.route('/', methods=['GET', 'POST'])
+@akdm.route('/index', methods=['GET', 'POST'])
 @akdm.route('/login', methods=['GET', 'POST'])
 def login():
 
@@ -37,23 +39,11 @@ def login():
 #    )
 
     # check if the API is alive and listening; if not, show the downtime screen
-    try:
-        request = requests.get(
-            akdm.config['api']['url'] + "stat",
-            verify=akdm.config['api']['verify_ssl']
-        )
-        akdm.config['api']['version'] = request.json()['meta']['api']['version']
-    except requests.exceptions.ConnectionError as requests_exception:
-        akdm.logger.error(requests_exception)
-        return flask.render_template(
-            'login_downtime.html',
-            api=None,
-            meta=settings.get_meta_dict()
-        )
+    util.stat_api()
 
     # before playing with forms or anything, see if we've got an active user
     if flask_login.current_user.is_authenticated:
-        akdm.logger.info("current user is authenticated redirecting: %" % flask_login.current_user)
+        akdm.logger.info("current user is authenticated redirecting: %s" % flask_login.current_user)
         return flask.redirect(flask.url_for('dashboard'))
 
     # check for LoginForm input; if we've got it, try to log a user in and, if
@@ -63,12 +53,20 @@ def login():
         user = users.User(username=form.username.data, password=form.password.data)
         user.login()
         if user._id is not None and user.token is not None:
+
+            # authenticate the user and log them in
             flask_login.login_user(user, remember=form.remember_me.data)
-            akdm.logger.info("successful auth: %s|%s" % (user, flask_login.current_user))
+
+            # handle 'next' page if we're stopping them to login first
             next_page = flask.request.args.get('next')
             if not next_page or werkzeug.urls.url_parse(next_page).netloc != '':
                 next_page = flask.url_for('dashboard')
-            return flask.redirect(next_page)
+
+            # create the response and set the JWT token in the cookie
+            redirect = flask.redirect(next_page)
+            response = akdm.make_response(redirect)
+            response.set_cookie('akdm_token', user.token)
+            return response
         else:
             flask.flash('Invalid username or password!')
             return flask.redirect(flask.url_for('login'))
@@ -87,9 +85,37 @@ def login():
 @akdm.route('/logout')
 def logout():
     """ Kills the flask_login 'session' and returns the user to the login. """
-    akdm.logger.warn(flask_login.current_user.get_id())
     flask_login.logout_user()
-    return flask.redirect(flask.url_for('/'))
+    redirect = flask.redirect(flask.url_for('login'))
+    response = akdm.make_response(redirect)
+    response.set_cookie('akdm_token', 'None')
+    return response
+
+
+@akdm.route('/register', methods=['GET','POST'])
+def register():
+    """ Shows and processes the signup form """
+
+    util.stat_api()
+
+    form = SignupForm()
+
+    if flask.request.method == 'POST' and form.validate():
+        user = users.User(username=form.username.data, password=form.password.data)
+        success, api_response = user.new()
+        if success:
+            flask.flash('Registration successful! Please sign in!')
+            return flask.redirect(flask.url_for('login'))
+        else:
+            flask.flash(api_response)
+
+    return flask.render_template(
+        'register.html',
+        api=akdm.config['api'],
+        meta=settings.get_meta_dict(),
+        form=form
+    )
+
 
 
 #

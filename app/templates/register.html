@@ -4,7 +4,7 @@
 
 <div class="login_controls_container">
 
-    <div id="loginLoginFormPanel" class="ng-fade login_control_panel">
+    <div id="loginSignupFormPanel" class="ng-fade login_control_panel">
 
         <form action="" method="post" novalidate>
 
@@ -24,9 +24,11 @@
                 {% endfor %}
             </p>
 
-            <p class="remember_me">
-                {{ form.remember_me() }}
-                {{ form.remember_me.label(class_='login_control_panel_label checkbox_label') }}
+            <p>
+                {{ form.confirm(size=32, placeholder='password (again)') }}
+                {% for error in form.password.errors %}
+                    <span class="login_field_error">[{{ error }}]</span>
+                {% endfor %}
             </p>
 
             <p>{{ form.submit(class_='kd_ui_button kd_ui_button_blue')}}</p>
@@ -41,7 +43,6 @@
 
 <div class="login_link_bar">
     <a ng-click="ui.showAboutModal=true">About</a>
-    <a href="/register">Sign Up!</a>
     <a ng-click="ui.showHelpModal=true">Forgot Password?</a>
 </div>
 

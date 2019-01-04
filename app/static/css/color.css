@@ -16,15 +16,29 @@ input[type=text]:focus,
 .settlement_event_lingering_effect .art {background: #FFFFFB; box-shadow: 0px 0px 1em -0.4em;}
 .settlement_event_lingering_effect .art .art_inset {background: #FAF1E1; }
 
+.settlement_location_modal_top {border-bottom-right-radius: 0; border-bottom-left-radius: 0; background: radial-gradient(#E0E0E0, #3D3936)}
+.settlement_location_item_container {background: #111;  }
+.settlement_location_item_graphic {background: #bbb; }
+.profile_gravatar {filter: grayscale(100%);}
+.settlement_location_item_recipe {background: #333; }
+.settlement_location_modal_bottom {background: linear-gradient(to bottom, #3D3936, #333, #111, #111); }
+
 /*  backgrounds - gradient */
 .paper_gradient {background: radial-gradient(#fff, #fff, #f8f8f8, #fffff9);}
 .settlement_event_gradient {background: radial-gradient(#FCF2E4, #F8E7CB,#F5E5CC);}
-
+.settlement_location_gradient {background: radial-gradient(#000,#111); color: #fff; }
 
 /*  Login effects   */
 a.splash_anchor {color: #000;}
+.login_splash h1, .login_splash h2 {color: #666; }
 .login_control_panel_input {background: transparent; border-bottom-color: #666; color: #333;}
 .login_control_panel_input:focus {outline: none; border-bottom-color: #ff52de; color: #000; }
+
+/*  header/footer   */
+.header, .footer {color: #999; }
+
+/*  rulebook styles */
+.rulebook_headline {border-color: #aaa; color: #666;}
 
 
 /*
@@ -35,6 +49,7 @@ a.splash_anchor {color: #000;}
 .kd_ui_button {background: transparent; border-color: #fff; box-shadow: 0px 0px 1em -0.3em #000; color: #000; }
 .kd_ui_button:focus {box-shadow: 0px 0px 1em -0.1em #ff9900;  }
 .kd_ui_button_blue {background: linear-gradient(to bottom, #60DAF5, #40AFD3); color: #fff; }
+.kd_ui_button_grey {background: linear-gradient(to bottom, #bbb, #777); color: #fff; }
 
 /*  AFFINITY!   */
 .affinity_red {background: #CD2027; background-color: #CD2027; color: #fff;}
