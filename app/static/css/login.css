@@ -1,9 +1,11 @@
 
 /*  splash    */
 a.splash_anchor {text-decoration: none}
-.login_splash {width: 65%; margin-bottom: 10em; }
+.login_splash {width: 75%; margin-bottom: 10em; }
 .login_splash h1 {font-size: 8vw; text-align: center; margin: 0; margin-top: -2%; text-transform: uppercase; font-weight: normal; }
 .login_splash h2 {font-size: 15vw; text-align: center; letter-spacing: 0.05em; margin-bottom: 0; text-transform: uppercase; font-weight: normal; }
+
+p.app_description {text-align: center;}
 
 /*  login controls */
 .login_controls_container {display: flex; flex-direction: column; flex-wrap: nowrap; }
@@ -21,3 +23,7 @@ a.splash_anchor {text-decoration: none}
 /*  downtime container */
 .downtime_container {}
 
+/* reset pw */
+.reset_pw_panel {width: 75%; margin: 1em auto; margin-top: 2em; text-align: center; }
+.reset_pw_graphic {margin: 0 auto; width: 10em; margin-bottom: 2em;}
+.reset_pw_panel p.reset_pw_response {font-size: 1.3em; }

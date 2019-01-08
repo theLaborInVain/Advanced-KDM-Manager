@@ -1,3 +1,6 @@
+# private settings
+private.cfg
+
 # files created by the installer
 deploy/start.sh
 deploy/akdm-manager.nginx.conf

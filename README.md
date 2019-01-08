@@ -25,5 +25,13 @@ Install and start an instance of the dev server:
     # apt-get install -y nginx python3 python3-venv python3-dev supervisor
     $ source install.sh
 
+## Add your API key
+Create a file in the project root directory called `private.cfg`. Update the file:
+
+    [api]
+    key = YOUR_SECRET_API_KEY
+
+The server will run without an API key, though the application will mostly fail. Check the documentation for [the KDM API](https://github.com/toconnell/kdm-manager) for more information on API keys and how to use them.
+
 ## Run the dev server
     $ ./server.sh dev

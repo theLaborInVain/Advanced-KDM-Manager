@@ -9,8 +9,9 @@ input[type=text]:focus,
 
 
 /*  backgrounds */
-.settlement_event_modal_top {background: radial-gradient(#F5E8d7,#F5E5CC)}
-.settlement_event_modal_bottom {background: linear-gradient(to bottom, #FDF2e9, #FDF2ef, #F5E5CC); }
+.settlement_event_modal_top {background: radial-gradient(#F5E8d7,#F5E5CC); color: #222; }
+.settlement_event_modal_bottom {background: linear-gradient(to bottom, #FDF2e9, #FDF2ef, #F5E5CC); border-color: #F5d5bD; color: #222; }
+.settlement_event_modal_bottom p a {color: #000;}
 .settlement_event_lingering_effect_hr {background: linear-gradient(to right, rgba(237,223,210,0), #EDDFD2, #EDDFD2, #EDDFD2, rgba(237, 223, 210,0)); color: #745C40;}
 .settlement_event_lingering_effect {background: #FBF7F6; box-shadow: 0px 0px 1em -0.3em;}
 .settlement_event_lingering_effect .art {background: #FFFFFB; box-shadow: 0px 0px 1em -0.4em;}
@@ -29,7 +30,7 @@ input[type=text]:focus,
 .settlement_location_gradient {background: radial-gradient(#000,#111); color: #fff; }
 
 /*  Login effects   */
-a.splash_anchor {color: #000;}
+a.splash_anchor {color: #777;}
 .login_splash h1, .login_splash h2 {color: #666; }
 .login_control_panel_input {background: transparent; border-bottom-color: #666; color: #333;}
 .login_control_panel_input:focus {outline: none; border-bottom-color: #ff52de; color: #000; }
@@ -46,6 +47,8 @@ a.splash_anchor {color: #000;}
 /*
 
 /*  KD UI elements - keep these towards the end */
+.kd_ui_button_blue,
+    .kd_ui_button_grey {transition: 1s;}
 .kd_ui_button {background: transparent; border-color: #fff; box-shadow: 0px 0px 1em -0.3em #000; color: #000; }
 .kd_ui_button:focus {box-shadow: 0px 0px 1em -0.1em #ff9900;  }
 .kd_ui_button_blue {background: linear-gradient(to bottom, #60DAF5, #40AFD3); color: #fff; }

@@ -14,13 +14,14 @@ MDB = MongoClient()['akdm_webapp']
 
 def stat_api():
 
-    """ Hits the api's 'stat' enpoint or dies trying. Updates the app config OR
+    """ Hits the api's 'stat' endpoint or dies trying. Updates the app config OR
     returns an exception. """
 
     try:
         request = requests.get(
             akdm.config['api']['url'] + "stat",
-            verify=akdm.config['api']['verify_ssl']
+            verify = akdm.config['api']['verify_ssl'],
+            headers = {"API-Key": "AKDMM"},
         )
         akdm.config['api']['version'] = request.json()['meta']['api']['version']
         return True

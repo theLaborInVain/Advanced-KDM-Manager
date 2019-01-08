@@ -15,9 +15,12 @@ from app import akdm
 #   is imported. 
 #
 
-def initialize_config():
+def initialize_config(private=False):
     """ Parses the 'settings.cfg' file and returns a configparser object. """
-    c_path = os.path.join(akdm.root_path, "..", "settings.cfg")
+    if private:
+        c_path = os.path.join(akdm.root_path, "..", "private.cfg")
+    else:
+        c_path = os.path.join(akdm.root_path, "..", "settings.cfg")
     config = configparser.ConfigParser()
     config.read_file(open(c_path))
     return config

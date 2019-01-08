@@ -46,7 +46,7 @@
                 <a href="/" class="splash_anchor">
                     <h2>Advanced</h2>
                     <h1>KDM Manager</h1>
-                    <p>The next generation of the original campaign manager for <i>Monster</i> by Kingdom Death!</p>
+                    <p class="app_description">The next generation of the original campaign manager for <i>Monster</i> by Kingdom Death!</p>
                 </a>
 
                 <hr/>
@@ -136,14 +136,60 @@
         </div> <!-- aboutModal -->
 
         <div id="helpModal" ng-if="ui.showHelpModal" class="ng-fade modal_container">
-            <div class="ui_modal settlement_event_gradient" ng-click="ui.showHelpModal=false">
+            <div class="ui_modal settlement_event_gradient">
                 <div class="settlement_event_modal_top">
                     <h1>Password Reset</h1>
                     <p class="subtitle">- Read these instuctions carefully! -</p>
                 </div>
                 <div class="settlement_event_modal_bottom">
-                    <p>Instructions go here.</p>
-				</div>
+                    <p></p>
+                    <p>Enter your email address below and <b>Advanced KDM Manager</b> will send you an email with instructions on how to reset your password.</p>
+                    <p>Please allow several minutes (and check your Junk/Spam folders!) for the email to arrive before pressing the submit button again.</p>
+
+                    <div id="resetPasswordPanel" class="reset_pw_panel" ng-if="ui.showResetPasswordPanel">
+                        <input
+                            id="resetPasswordInput"
+                            ng-model="reset_pw.email"
+                            type="email"
+                            placeholder="email"
+                            ng-init=(document.getElementById("resetPasswordInput").focus();)
+                            validate
+                        />
+                        <button
+                            ng-disabled="reset_pw.email === undefined"
+                            ng-class="{
+                                kd_ui_button_blue: reset_pw.email !== undefined,
+                            }"
+                            class="ng-fade kd_ui_button"
+                            ng-click="
+                                ui.showResetPasswordPanel = false;
+                                ui.showResetPasswordLoader = true;
+                                resetPassword();
+                            "
+                        >
+                            Reset Password!
+                        </button>
+                    </div>
+
+                    <div id="resetPasswordLoader" ng-if="ui.showResetPasswordLoader" class="ng-fade reset_pw_panel">
+                        <img src="/static/images/loading.gif" class="reset_pw_graphic"/>
+                    </div>
+
+                    <div id="resetPasswordResult" ng-if="ui.showResetPasswordResult" class="ng-fade reset_pw_panel">
+                        <p class="reset_pw_response affinity_red_text">{a reset_pw.response.data a}</p>
+                        <button 
+                            ng-if="reset_pw.response.status !== 200"
+                            class="kd_ui_button kd_ui_button_grey" ng-click="resetPasswordForm()"
+                        >
+                            Try again
+                        </button>
+                    </div>
+
+                    <hr/>
+
+                    <button class="kd_ui_button kd_ui_button_grey" ng-click="ui.showHelpModal=false">Back</button>
+
+                </div> <!-- settlement_event_modal_bottom -->
             </div><!-- ui_modal -->
         </div> <!-- helpModal modal_container -->
 

@@ -15,7 +15,7 @@ app.controller("rootController", function($scope, $http) {
     };
 
 
-    $scope.apiGET = function(endpoint, token) {
+    $scope.apiGET = function(endpoint) {
         // returns a promise!
 
         var req_url = $scope.api_url + endpoint;
@@ -25,9 +25,30 @@ app.controller("rootController", function($scope, $http) {
             url: $scope.api_url + endpoint,
             headers: {
                 'Content-Type': undefined,
-                'Authorization': $scope.access_token
-                },
-            data: { test: 'test' }
+                'Authorization': $scope.access_token,
+                'API-Key': $scope.api_key,
+            },
+        }
+
+		console.warn(req_url);
+
+        return $http(req)
+
+    };
+
+    $scope.apiPOST = function(endpoint, post_body) {
+        // returns a promise!
+
+        var req_url = $scope.api_url + endpoint;
+
+        var req = {
+            method: 'POST',
+            url: req_url,
+            headers: {
+                'Authorization': $scope.access_token,
+                'API-Key': $scope.api_key,
+            },
+            data: post_body
         }
 
 		console.warn(req_url);
