@@ -48,3 +48,24 @@ class SignupForm(FlaskForm):
     confirm = PasswordField('Password Again')
 
     submit = SubmitField('Sign up')
+
+
+class ResetForm(FlaskForm):
+
+    """ Similar to SignupForm: requires the email and the password 2x, etc. """
+
+    username = StringField('Username', validators=[
+        validators.DataRequired(),
+        validators.Email(),
+        validators.Optional(strip_whitespace=True)
+    ])
+
+    password = PasswordField('New Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+
+    remember_me = BooleanField('Remember Me')
+    confirm = PasswordField('Password Again')
+
+    submit = SubmitField('Reset password')

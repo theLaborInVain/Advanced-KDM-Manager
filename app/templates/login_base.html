@@ -139,7 +139,7 @@
             <div class="ui_modal settlement_event_gradient">
                 <div class="settlement_event_modal_top">
                     <h1>Password Reset</h1>
-                    <p class="subtitle">- Read these instuctions carefully! -</p>
+                    <p class="subtitle">- Please read these instuctions carefully! -</p>
                 </div>
                 <div class="settlement_event_modal_bottom">
                     <p></p>
@@ -152,7 +152,6 @@
                             ng-model="reset_pw.email"
                             type="email"
                             placeholder="email"
-                            ng-init=(document.getElementById("resetPasswordInput").focus();)
                             validate
                         />
                         <button
@@ -185,9 +184,15 @@
                         </button>
                     </div>
 
-                    <hr/>
+                    <hr ng-if="ui.showCloseResetPasswordButton"/>
 
-                    <button class="kd_ui_button kd_ui_button_grey" ng-click="ui.showHelpModal=false">Back</button>
+                    <button
+                        class="kd_ui_button kd_ui_button_grey"
+                        ng-click="ui.showHelpModal=false"
+                        ng-if="ui.showCloseResetPasswordButton"
+                    >
+                        Back
+                    </button>
 
                 </div> <!-- settlement_event_modal_bottom -->
             </div><!-- ui_modal -->

@@ -7,7 +7,8 @@ app.controller("loginController", function($scope) {
         showHelpModal: false,
         showResetPasswordPanel: true,
         showResetPasswordLoader: false,
-        showResetPasswordReset: false
+        showResetPasswordReset: false,
+        showCloseResetPasswordButton: true,
     };
 
 	$scope.reset_pw = {};
@@ -22,6 +23,7 @@ app.controller("loginController", function($scope) {
         console.time($scope.api_url + endpoint);
         $scope.apiPOST(endpoint, data).then(
             function successCallback(response) {
+				$scope.ui.showCloseResetPasswordButton = false;
 				$scope.ui.showResetPasswordLoader = false;
 				$scope.ui.showResetPasswordResult = true;
                 $scope.reset_pw.response = response;

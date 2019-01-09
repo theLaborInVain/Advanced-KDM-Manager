@@ -52,10 +52,12 @@ input[type=text]:focus,
     /*  header/footer */
 
 .header, .footer {height: 1em; padding: 1%; width: 95%; }
-.header, .footer a {text-decoration: none; color: #111; font-size: 0.9em; }
-.header, .footer a b {font-size: 0.85em; }  /* because Ruda numbers are fucking gigantic */
+.header,
+ .footer,
+ .footer a {text-decoration: none; font-size: 0.9em; }
+.footer b {font-size: 0.9em; }  /* because Ruda numbers are fucking gigantic */
 
-.header {text-align: center; border-bottom: 1px solid #aaa; }
+.header {text-align: center; border-bottom: 1px solid #aaa; position: fixed; }
 .footer {text-align: right; border-top: 1px solid #aaa; padding-right: 0; }
 
     /*  UI elements selected by ID - teh l33t d3v shit  */

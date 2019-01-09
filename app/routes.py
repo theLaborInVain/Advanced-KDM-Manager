@@ -12,7 +12,7 @@ import requests
 import werkzeug
 
 from app import akdm
-from app.forms import LoginForm, SignupForm
+from app.forms import LoginForm, SignupForm, ResetForm
 
 from app.models import users
 
@@ -117,6 +117,41 @@ def register():
     )
 
 
+@akdm.route('/reset_password', methods=['GET','POST'])
+def reset_pw():
+    """ Shows and processes the password reset form. """
+
+    util.stat_api()
+
+    form = ResetForm()
+
+    if flask.request.method == 'POST' and form.validate():
+        user = users.User(username=form.username.data)
+        reset_result = user.reset_password(
+            new_password = form.password.data,
+            recovery_code = flask.request.args.get('recovery_code')
+        )
+
+        # user.reset_password() logs the user in, so we should have an _id and
+        # a self.token now, which we can use to log us into AKDMM
+        if user._id is not None and user.token is not None:
+            flask_login.login_user(user, remember=form.remember_me.data)
+            next_page = flask.url_for('dashboard')
+            redirect = flask.redirect(next_page)
+            response = akdm.make_response(redirect)
+            response.set_cookie('akdm_token', user.token)
+            return response
+        else:
+            flask.flash(reset_result)
+
+    return flask.render_template(
+        'reset_password.html',
+        api=akdm.config['api'],
+        meta=settings.get_meta_dict(),
+        form=form
+    )
+
+
 
 #
 #   Actual application!
@@ -130,7 +165,6 @@ def dashboard():
     everything else is between the user and the API (via angular code in the
     HTML doc we return. """
 
-    akdm.logger.info("current_user: %s" % dir(flask_login.current_user))
     return flask.render_template(
         'dashboard.html',
         api=akdm.config['api'],

@@ -19,37 +19,76 @@
         <script src="/static/js/akdmManager.js?v={{meta.version}}"></script>
         <script src="/static/js/dashboard.js?v={{meta.version}}"></script>
 
-        <!-- CSS -->
+        <!-- fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Ruda" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/static/css/fonts.css?v={{meta.version}}">
+
+        <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="/static/css/style.css?v={{meta.version}}">
         <link rel="stylesheet" type="text/css" href="/static/css/dashboard.css?v={{meta.version}}">
         <link rel="stylesheet" type="text/css" href="/static/css/z-index.css?v={{meta.version}}">
         <link rel="stylesheet" type="text/css" href="/static/css/color.css?v={{meta.version}}">
 
-        <!-- fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Ruda" rel="stylesheet">
+        <!-- UI themes based on user preference for night_mode -->
+        <link
+            ng-if="user.preferences.night_mode === true"
+            rel="stylesheet"
+            type="text/css"
+            href="/static/css/theme_dark.css"
+        >
+
+        <link
+            ng-if="user.preferences.night_mode === false"
+            rel="stylesheet"
+            type="text/css"
+            href="/static/css/theme_light.css"
+        >
+
 
     </head>
 
-    <body ng-controller="dashboardController" class="paper_gradient">
+    <body ng-controller="dashboardController">
 
 
         <div id="container">
         
             <div class="header">
-                - AKDM Manager: Dashboard -
+                - Dashboard -
             </div><!-- header -->
 
-            <button
-				class="kd_ui_button kd_ui_button_blue"
-				ng-if="user.login !== undefined"
-				ng-click="ui.showProfileModal=true"
-			>
-				Profile
-			</button>
+            <!-- dashboard button application starts here -->
+            <div class="dashboard_button_container">
+
+
+                <div class="dashboard_button clickable">
+                    <p>latest settlement</p>
+                    <p>with summary info</p>
+                </div>
+
+                <div class="dashboard_button clickable">
+                    campaigns
+                </div>
+
+                <div
+                    class="dashboard_button clickable"
+				    ng-if="user.login !== undefined"
+    				ng-click="ui.showProfileModal=true"
+                >
+                    <p>Settings</p>
+                </div>
+
+                <div class="dashboard_button clickable">
+                    world
+                </div>
+
+                <div class="dashboard_button clickable">
+                    about/info
+                </div>
+
+            </div><!-- dashboard_button_container -->
 
             <div class="footer">
-                {a user.login a}
+                Advanced KDM-Manager: Version <b>{{meta.version}}</b>
             </div><!-- footer -->
 
         </div><!-- container -->

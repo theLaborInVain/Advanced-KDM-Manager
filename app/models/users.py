@@ -33,6 +33,7 @@ class User(UserMixin):
         self.username = username
         self.password = password
         self.token = token
+        self.ui_theme = "UNDEFINED"
 
         # LoginManager attribs
 #        self.is_authenticated = False
@@ -66,7 +67,7 @@ class User(UserMixin):
         else:
             return True, response.text
 
-        return False, "I AM ERROR"
+        return False, "UNHANDLED USER CREATION ERROR"
 
 
     def login(self):
@@ -93,10 +94,10 @@ class User(UserMixin):
             self.token = user['access_token']
             return True
 
+
     def get_id(self):
         """ Required for Flask-Login; also just a good idea. """
         return str(self._id)
-
 
 
     def refresh_token(self):
@@ -115,3 +116,27 @@ class User(UserMixin):
             return True
 
         return False
+
+
+    def reset_password(self, new_password=None, recovery_code=None):
+        """ Dials the API, resets the password to 'new_password' and, if
+        successful, logs the user in. """
+
+        endpoint = akdm.config['api']['url'] + 'reset_password/reset'
+        response = requests.post(
+            endpoint,
+            verify = akdm.config['api']['verify_ssl'],
+            json = {
+                'username': self.username,
+                'password': new_password,
+                'recovery_code': recovery_code
+            }
+        )
+
+        if response.status_code == 200:
+            self.password = new_password
+            self.login()
+        else:
+            return response.text
+
+        return "UNHANDLED RESET PASSWORD ERROR"
