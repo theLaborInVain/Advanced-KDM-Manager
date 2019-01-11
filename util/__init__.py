@@ -5,10 +5,13 @@
 
 """
 
+import flask
+
 from pymongo import MongoClient
 import requests
 
 from app import akdm
+from . import settings
 
 MDB = MongoClient()['akdm_webapp']
 
@@ -20,8 +23,8 @@ def stat_api():
     try:
         request = requests.get(
             akdm.config['api']['url'] + "stat",
-            verify = akdm.config['api']['verify_ssl'],
-            headers = {"API-Key": "AKDMM"},
+            verify=akdm.config['api']['verify_ssl'],
+            headers={"API-Key": "AKDMM"},
         )
         akdm.config['api']['version'] = request.json()['meta']['api']['version']
         return True
@@ -33,4 +36,4 @@ def stat_api():
             meta=settings.get_meta_dict()
         )
 
-    raise
+    return False

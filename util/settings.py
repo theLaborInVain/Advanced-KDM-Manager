@@ -2,18 +2,21 @@
 
     Convenience methods for getting at application settings live here.
 
-"""
+    Important! Whenever this module is imported, it has an attribute
+    called CONFIG, which is created by running initialize_config().
 
+    The initialize_config() method is what determines which settings file
+    gets read, i.e. "settings.cfg" or "private.cfg", so you may need
+    to run that AGAIN after importing to make sure that you're getting the
+    config settings you want.
+
+"""
 
 import configparser
 import os
 
 from app import akdm
 
-#
-#   First, initialize the config object (from settings.cfg) whenever the module
-#   is imported. 
-#
 
 def initialize_config(private=False):
     """ Parses the 'settings.cfg' file and returns a configparser object. """
