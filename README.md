@@ -19,13 +19,24 @@ For more information, please refer to [the 'About' section of the project's deve
 
 Install and start an instance of the dev server:
 
-## Install
-`install.sh` is not executable by default. Do not execute it directly!
+## 1.) Install
 
-    # apt-get install -y nginx python3 python3-venv python3-dev supervisor
+First, install base/background dependencies:
+
+    # apt-get -y update
+    # apt-get -y install python3 python3-venv python3-dev supervisor nginx git
+
+Then, clone the repo down to your home dir (or wherever) and find the
+`install.sh` file in the root of the project directory.
+
+Important! `install.sh` is not executable by default. Do not execute it
+directly!
+
+Instead, do this to install the webapp:
+
     $ source install.sh
 
-## Add your API key
+## 2.) Add your API key
 Create a file in the project root directory called `private.cfg`. Update the file:
 
     [api]
@@ -35,5 +46,5 @@ The server will run without an API key, though the application will mostly fail 
 
 Check the documentation for [the KDM API](https://github.com/toconnell/kdm-manager) for more information on how to setup an API server and make your own key, or how to get a key to the production instance of the KDM API.
 
-## Run the dev server
+## 3.) Run the dev server
     $ ./server.sh dev
