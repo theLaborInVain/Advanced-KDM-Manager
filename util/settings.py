@@ -5,11 +5,6 @@
     Important! Whenever this module is imported, it has an attribute
     called CONFIG, which is created by running initialize_config().
 
-    The initialize_config() method is what determines which settings file
-    gets read, i.e. "settings.cfg" or "private.cfg", so you may need
-    to run that AGAIN after importing to make sure that you're getting the
-    config settings you want.
-
 """
 
 import configparser
@@ -19,13 +14,14 @@ from app import akdm
 
 
 def initialize_config(private=False):
-    """ Parses the 'settings.cfg' file and returns a configparser object. """
-    if private:
-        c_path = os.path.join(akdm.root_path, "..", "private.cfg")
-    else:
-        c_path = os.path.join(akdm.root_path, "..", "settings.cfg")
+    """ Parses the both of the app's files and returns a configparser object.
+    The resulting object contains both files' sections, items, etc. """
+    c_path_settings = os.path.join(akdm.root_path, "..", "settings.cfg")
+    c_path_private = os.path.join(akdm.root_path, "..", "private.cfg")
+
     config = configparser.ConfigParser()
-    config.read_file(open(c_path))
+    config.read([c_path_settings, c_path_private])
+
     return config
 
 CONFIG = initialize_config()

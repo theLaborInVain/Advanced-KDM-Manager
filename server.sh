@@ -39,24 +39,8 @@ start_venv() {
 case "$1" in
     dev)
         start_venv development $DEV_API_URL $DEV_API_PORT
-#        flask run --host=0.0.0.0 --port=8015
         python akdm.py
         ;;
-#    start)
-#        start_service
-#   unicorn --certfile cert.pem --keyfile key.pem -b 0.0.0.0:8000 hello:app
-#        ;;
-#    stop)
-#        stop_service
-#        ;;
-#    restart)
-#        stop_service
-#        start_service
-#        ;;
-#    status)
-#        $CMD status $SERVICE
-#        $CMD status $SOCKET
-#        ;;
     *)
         echo "Usage: $NAME {dev|prod}" >&2
         exit 3

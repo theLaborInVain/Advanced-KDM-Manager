@@ -69,25 +69,31 @@ input[type=text]:focus,
 
     /* the modal shit show */
 
-.modal_container {background: rgba(0,0,0,0.2); position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+.modal_container {
+    background: rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0; bottom: 0; left: 0; right: 0;
+    overflow: auto;
+    height: auto;
+}
 
 .ui_modal {             /* for when the modal is a KD card */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-    width: 90%;
-    height: 90%;
+  position: absolute;
+  left: 5vw; right: 5vw; bottom: auto; 
     border-radius: 1.2em;
     display: flex;
     flex-direction: column;
     border: 1px solid #999;
+  margin: auto;
+  margin-top: 5vh; /* min space ABOVE top of card */
+  margin-bottom: 5vh; 
+  padding-bottom: 5vh; /* min blank space at bottom of card*/ 
 }
 
 
 /* KD buttons */
 
-.kd_ui_button {border: 0.3em solid; padding: 0.5em; border-width: 0.3em; border-radius: 666em; margin: 0 auto; margin: 0.5em; font-size: 1.2em; font-weight: bold; width: 95%; }
+.kd_ui_button {display: block; border: 0.3em solid; padding: 0.5em; border-width: 0.3em; border-radius: 666em; margin: 0 auto; margin: 1em auto; font-size: 1.2em; font-weight: bold; width: 95%; max-width: 65vw;}
 
 /* rulebook styles */
 
@@ -114,7 +120,7 @@ input[type=text]:focus,
 .settlement_event_modal_top h1 {text-align: center; padding-top: 1%; font-size: 2.5em;  margin-bottom:0;}
 .settlement_event_modal_top .subtitle {text-align: center; margin-top: -0.5%; }
 
-.settlement_event_modal_bottom {margin-top: -5%; border-top: 1px solid; border-radius: 50%/5%; height: 85%; padding-top: 7%; }
+.settlement_event_modal_bottom {border-top: 1px solid; border-radius: 50%/5%; height: 85%; padding-top: 7%; }
 .settlement_event_modal_bottom p {text-align: center; font-size: 1.2em; width: 80%; margin: 0 auto; margin-bottom: 3%; }
 .settlement_event_modal_bottom p a {text-decoration: none;  font-weight: bold; }
 

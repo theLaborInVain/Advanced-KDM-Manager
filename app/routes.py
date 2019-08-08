@@ -43,7 +43,9 @@ def login():
 
     # before playing with forms or anything, see if we've got an active user
     if flask_login.current_user.is_authenticated:
-        akdm.logger.info("current user is authenticated redirecting: %s" % flask_login.current_user)
+        akdm.logger.info(
+            "redirecting authenticated user: %s" % flask_login.current_user
+        )
         return flask.redirect(flask.url_for('dashboard'))
 
     # check for LoginForm input; if we've got it, try to log a user in and, if
