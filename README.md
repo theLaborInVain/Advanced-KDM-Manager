@@ -5,7 +5,7 @@
 ## Introduction 
 [https://a.kdm-manager.com](https://a.kdm-manager.com), also known as Advanced
 KDM-Manager, is an Interactive campaign manager for *Monster* by
-[Kingdom Death](https://kingdomdeath.com). It supersedes Timothy O'Connell's
+[Kingdom Death](https://kingdomdeath.com). It replaces Timothy O'Connell's
  [KDM Manager](https://github.com/toconnell/kdm-manager).
 
 
